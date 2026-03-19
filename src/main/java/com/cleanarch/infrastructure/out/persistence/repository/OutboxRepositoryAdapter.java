@@ -1,5 +1,4 @@
 package com.cleanarch.infrastructure.out.persistence.repository;
-
 import com.cleanarch.application.outbox.port.OutboxRepositoryPort;
 import com.cleanarch.domain.model.OutboxEvent;
 import com.cleanarch.infrastructure.out.persistence.entity.OutboxEventEntity;
@@ -26,7 +25,7 @@ public class OutboxRepositoryAdapter implements OutboxRepositoryPort {
                 .createNativeQuery("""
                       SELECT * FROM outbox_events
                       WHERE status = 'PENDING'
-                      ORDER BY createdAt 
+                      ORDER BY createdAt
                       LIMIT :batchSize
                       FOR UPDATE SKIP LOCKED
                     """, OutboxEventEntity.class)
@@ -40,6 +39,7 @@ public class OutboxRepositoryAdapter implements OutboxRepositoryPort {
     }
 
     @Override
+    @Transactional
     public void markAsProcessing(List<UUID> ids) {
 
         entityManager
@@ -54,6 +54,7 @@ public class OutboxRepositoryAdapter implements OutboxRepositoryPort {
     }
 
     @Override
+    @Transactional
     public void markAsPublished(UUID eventId) {
         entityManager
                 .createQuery("""
@@ -67,13 +68,14 @@ public class OutboxRepositoryAdapter implements OutboxRepositoryPort {
     }
 
     @Override
+    @Transactional
     public void markAsFailed(UUID eventId, String error) {
         entityManager
                 .createQuery("""
                         UPDATE OutboxEventEntity e
                         SET e.status = 'FAILED',
-                            e.nextRetryAt = CURRENT_TIMESTAMP + 5000,
-                            e.retryCount = e.retryCount + 1,
+                            e.nextRetryAt = CURRENT_TIMESTAMP + INTERVAL '5 seconds',
+                            e.retryCount = COALESCE(e.nextRetryAt,0) + 1,
                             e.errorMessage = :error
                         WHERE e.id = :eventId
                     """
