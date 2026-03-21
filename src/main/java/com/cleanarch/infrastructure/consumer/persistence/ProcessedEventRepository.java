@@ -27,6 +27,5 @@ public class ProcessedEventRepository implements ProcessedEventRepositoryPort {
                         """)
                 .setParameter("eventId", eventId)
                 .executeUpdate();
-
     }
 }

@@ -1,4 +1,4 @@
-package com.cleanarch.infrastructure.out.messaging;
+package com.cleanarch.infrastructure.out.kafka;
 
 import com.cleanarch.application.outbox.port.EventPublisherPort;
 import com.cleanarch.domain.model.OutboxEvent;

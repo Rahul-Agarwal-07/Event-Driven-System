@@ -41,5 +41,6 @@ public class PublishOutboxUseCase implements PublishOutboxUseCasePort {
                 outboxRepository.markAsFailed(event.getId(), e.getMessage());
             }
         }
+
     }
 }

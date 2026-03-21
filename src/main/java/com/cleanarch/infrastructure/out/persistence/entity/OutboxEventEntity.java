@@ -82,4 +82,54 @@ public class OutboxEventEntity {
     public Instant getProcessedAt() {
         return processedAt;
     }
+
+    // Setters
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public void setAggregateId(UUID aggregateId) {
+        this.aggregateId = aggregateId;
+    }
+
+    public void setAggregateType(String aggregateType) {
+        this.aggregateType = aggregateType;
+    }
+
+    public void setEventType(String eventType) {
+        this.eventType = eventType;
+    }
+
+    public void setPayload(String payload) {
+        this.payload = payload;
+    }
+
+    public void setEventVersion(Integer eventVersion) {
+        this.eventVersion = eventVersion;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setRetryCount(Integer retryCount) {
+        this.retryCount = retryCount;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
+    public void setNextRetryAt(Instant nextRetryAt) {
+        this.nextRetryAt = nextRetryAt;
+    }
+
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setProcessedAt(Instant processedAt) {
+        this.processedAt = processedAt;
+    }
 }

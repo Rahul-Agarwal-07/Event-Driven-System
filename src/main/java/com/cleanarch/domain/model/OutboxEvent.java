@@ -10,7 +10,7 @@ public class OutboxEvent {
     private UUID id;
     private UUID aggregateId;
     private String aggregateType;
-    private String eventType;
+    private EventType eventType;
     private Integer eventVersion;
 
     private String payload;
@@ -26,7 +26,7 @@ public class OutboxEvent {
             UUID id,
             UUID aggregateId,
             String aggregateType,
-            String eventType,
+            EventType eventType,
             Integer eventVersion,
             String payload,
             OutboxStatus status,
@@ -60,7 +60,7 @@ public class OutboxEvent {
         return aggregateId;
     }
 
-    public String getEventType() {
+    public EventType getEventType() {
         return eventType;
     }
 

@@ -1,5 +1,6 @@
 package com.cleanarch.infrastructure.out.persistence.mapper;
 
+import com.cleanarch.domain.model.EventType;
 import com.cleanarch.domain.model.OutboxEvent;
 import com.cleanarch.domain.model.OutboxStatus;
 import com.cleanarch.infrastructure.out.persistence.entity.OutboxEventEntity;
@@ -12,7 +13,7 @@ public class OutboxMapper {
             entity.getId(),
             entity.getAggregateId(),
             entity.getAggregateType(),
-            entity.getEventType(),
+            EventType.valueOf(entity.getEventType()),
             entity.getEventVersion(),
             entity.getPayload(),
             OutboxStatus.valueOf(entity.getStatus()),
