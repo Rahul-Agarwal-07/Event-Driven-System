@@ -107,7 +107,6 @@ application/
 infrastructure/
   ├── kafka/
   ├── persistence/
-  ├── email/
   
 domain/
   ├── model/
